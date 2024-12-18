@@ -134,9 +134,14 @@ class Dizconto_Settings_Setup {
                 submit_button(__('Save Settings', 'dizconto'));
                 ?>
             </form>
-            <hr style="margin: 25px 0;" />
-            <h2><?php esc_html_e( 'Dizconto Pay', 'dizconto' ); ?></h2>
-            <p>You can manage the payment methods in <a href="<?php echo esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ); ?>">WooCommerce -> Settings -> Payments.</a></p>
+                <hr style="margin: 25px 0;" />
+                <h2><?php esc_html_e( 'Dizconto Pay', 'dizconto' ); ?></h2>
+            <?php if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) : ?>
+                <p>You can manage the payment methods in <a href="<?php echo esc_url( admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ); ?>">WooCommerce -> Settings -> Payments.</a></p>
+            <?php else : ?>
+                <p><?php esc_html_e( 'Dizconto Pay requires WooCommerce to be installed and activated.', 'dizconto' ); ?></p>
+                <p><a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=woocommerce' ) ) ?>" target="_blank" class="button button-primary"><?php esc_html_e( 'Install WooCommerce', 'dizconto' ); ?></a></p>
+            <?php endif; ?>
         </div>
         <?php
     }
