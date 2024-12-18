@@ -2,3 +2,4 @@ node_modules
 docker-compose.local.yml
 .git
 build
+dizconto-wordpress.zip
