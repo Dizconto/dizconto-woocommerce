@@ -13,7 +13,7 @@ class WC_Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
         $this->icon = '';
         $this->has_fields = false;
         $this->method_title = 'Dizconto Pay';
-        $this->method_description = 'Pix payments';
+        $this->method_description = 'Take payments with Pix.';
 
         // Form fields
         $this->title = 'Pix';

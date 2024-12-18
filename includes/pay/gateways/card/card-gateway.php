@@ -13,7 +13,7 @@ class WC_Dizconto_Pay_Card_Gateway extends WC_Payment_Gateway {
         $this->icon = '';
         $this->has_fields = true;
         $this->method_title = WC_DIZCONTO_PAY_TITLE;
-        $this->method_description = 'Credit & Debit card payments';
+        $this->method_description = 'Take payments with credit & debit cards.';
 
         // Form fields
         $this->title = 'Credit & Debit Cards';
