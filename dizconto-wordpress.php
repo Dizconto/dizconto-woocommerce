@@ -17,7 +17,7 @@ define( 'DIZCONTO_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DIZCONTO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 // Include the loader.
-require_once DIZCONTO_PLUGIN_DIR . 'src/setup.php';
+require_once DIZCONTO_PLUGIN_DIR . 'includes/setup.php';
 
 // Initialize the plugin.
 Dizconto_Loader::init();

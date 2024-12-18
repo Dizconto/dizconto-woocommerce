@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 const WC_DIZCONTO_PAY_TITLE = 'Dizconto Pay';
-const WC_DIZCONTO_PAY_GATEWAYS_DIR = DIZCONTO_PLUGIN_DIR . 'src/pay/gateways/';
+const WC_DIZCONTO_PAY_GATEWAYS_DIR = DIZCONTO_PLUGIN_DIR . 'includes/pay/gateways/';
 
 /**
  * Initialize the Dizconto Pay gateway.

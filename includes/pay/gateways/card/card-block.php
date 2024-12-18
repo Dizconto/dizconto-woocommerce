@@ -14,7 +14,7 @@ final class WC_Dizconto_Pay_Card_Block extends AbstractPaymentMethodType {
     public function get_payment_method_script_handles() {
         wp_register_script(
             'wc-dizconto-pay-card-blocks-integration',
-            plugin_dir_url(__FILE__) . 'card-checkout.js',
+            DIZCONTO_PLUGIN_URL . 'src/blocks/card-checkout.js',
             [
                 'wc-blocks-registry',
                 'wc-settings',

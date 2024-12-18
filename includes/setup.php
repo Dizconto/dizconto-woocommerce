@@ -21,7 +21,7 @@ class Dizconto_Loader {
 
     private static function init_features() {
         // Dizconto Pay.
-        require_once DIZCONTO_PLUGIN_DIR . 'src/pay/dizconto-pay-setup.php';
+        require_once DIZCONTO_PLUGIN_DIR . 'includes/pay/dizconto-pay-setup.php';
         Dizconto_Pay_Loader::init();
     }
 }
