@@ -14,7 +14,7 @@ final class WC_Dizconto_Pay_Pix_Block extends AbstractPaymentMethodType {
     public function get_payment_method_script_handles() {
         wp_register_script(
             'wc-dizconto-pay-pix-blocks-integration',
-            DIZCONTO_PLUGIN_URL . 'src/blocks/pix-checkout.js',
+            DIZCONTO_PLUGIN_URL . 'build/pix-checkout.js',
             [
                 'wc-blocks-registry',
                 'wc-settings',

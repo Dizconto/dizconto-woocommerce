@@ -1,5 +1,9 @@
-node_modules
-docker-compose.local.yml
 .git
-build
+/.idea/
+/.vscode/
+/node_modules/
+/src/
+
+docker-compose.local.yml
 dizconto-wordpress.zip
+
