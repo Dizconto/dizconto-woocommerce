@@ -1,26 +1,36 @@
-const createCardPaymentMethod = (() => {
+const cardPaymentMethod = (() => {
     const paymentMethod = 'dizconto_pay_card';
 
     const settings = window.wc.wcSettings.getSetting(paymentMethod + '_data', {});
-    const label = window.wp.htmlEntities.decodeEntities(settings.title);
 
-    const CardPaymentMethod = () => {
-        return window.wp.htmlEntities.decodeEntities(settings.description);
+    const Label = () => {
+        return (
+            <p>
+                {settings.title}
+            </p>
+        )
+    }
+
+    const Content = () => {
+        return (
+            <p>
+                {settings.description}
+            </p>
+        )
     }
 
     return {
         gatewayId: settings.id,
         paymentMethodId: paymentMethod,
         name: paymentMethod,
-        label: label,
-        ariaLabel: label,
-        content: Object( window.wp.element.createElement )( CardPaymentMethod, null ),
-        edit: Object( window.wp.element.createElement )( CardPaymentMethod, null ),
+        ariaLabel: settings.title,
+        label: <Label />,
+        content: <Content />,
+        edit: <Content />,
         canMakePayment: () => true,
         supports: {
             features: settings.supports,
         },
     };
 })()
-
-window.wc.wcBlocksRegistry.registerPaymentMethod(createCardPaymentMethod);
+window.wc.wcBlocksRegistry.registerPaymentMethod(cardPaymentMethod);
