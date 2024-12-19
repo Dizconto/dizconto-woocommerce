@@ -22,7 +22,7 @@ class WC_Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
         // Supported features
         $this->supports = array(
             'products',
-            'refund'
+            'refunds'
         );
 
 
@@ -36,6 +36,13 @@ class WC_Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
             'result'   => 'success',
             'redirect' => $order->get_checkout_order_received_url(),
         ];
+    }
+
+    public function process_refund( $order_id, $amount = null, $reason = '' ) {
+        if ( $amount > 0) {
+            return true;
+        }
+        return false;
     }
 
 }
