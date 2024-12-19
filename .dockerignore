@@ -1,8 +1,8 @@
 .git
 /.idea/
 /.vscode/
-/node_modules/
-/src/
+**/node_modules/
+**/src/
 
 docker-compose.local.yml
 dizconto-wordpress.zip

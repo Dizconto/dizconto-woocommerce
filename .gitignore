@@ -2,7 +2,7 @@
 
 /.idea/
 /.vscode/
-/node_modules/
-/build/
 
-dizconto-wordpress.zip
+**/node_modules/
+**/build/
+**/dizconto-wp.zip
