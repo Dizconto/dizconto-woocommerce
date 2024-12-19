@@ -27,7 +27,7 @@ class Dizconto_Pay_Loader {
      */
     public static function load_dependencies() {
         require_once WC_DIZCONTO_PAY_GATEWAYS_DIR . 'pix/index.php';
-        require_once WC_DIZCONTO_PAY_GATEWAYS_DIR . 'card/index.php';
+        require_once WC_DIZCONTO_PAY_GATEWAYS_DIR . 'credit-card/index.php';
     }
 
     /**
@@ -35,7 +35,7 @@ class Dizconto_Pay_Loader {
      */
     public static function add_payment_gateway($gateways) {
         $gateways[] = 'WC_Dizconto_Pay_Pix_Gateway';
-        $gateways[] = 'WC_Dizconto_Pay_Card_Gateway';
+        $gateways[] = 'WC_Dizconto_Pay_Credit_Card_Gateway';
         return $gateways;
     }
 
@@ -61,7 +61,7 @@ class Dizconto_Pay_Loader {
         }
         function register_payment_method_types($payment_method_registry) {
             $payment_method_registry->register(new WC_Dizconto_Pay_Pix_Block());
-            $payment_method_registry->register(new WC_Dizconto_Pay_Card_Block());
+            $payment_method_registry->register(new WC_Dizconto_Pay_Credit_Card_Block());
         }
         add_action('woocommerce_blocks_payment_method_type_registration', 'register_payment_method_types');
     }

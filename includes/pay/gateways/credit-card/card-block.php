@@ -2,19 +2,20 @@
 
 use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodType;
 
-final class WC_Dizconto_Pay_Card_Block extends AbstractPaymentMethodType {
+final class WC_Dizconto_Pay_Credit_Card_Block extends AbstractPaymentMethodType {
     private $gateway;
-    protected $name = 'dizconto_pay_card';
+    protected $name = 'dizconto_pay_credit_card';
     public function initialize() {
-        $this->gateway = new WC_Dizconto_Pay_Card_Gateway();
+        $this->gateway = new WC_Dizconto_Pay_Credit_Card_Gateway();
     }
     public function is_active() {
         return $this->gateway->is_available();
     }
     public function get_payment_method_script_handles() {
+        $integrationName = 'wc-dizconto-pay-credit-card-blocks-integration';
         wp_register_script(
-            'wc-dizconto-pay-card-blocks-integration',
-            DIZCONTO_PLUGIN_URL . 'build/card-checkout.js',
+            $integrationName,
+            DIZCONTO_PLUGIN_URL . 'build/credit-card-checkout.js',
             [
                 'wc-blocks-registry',
                 'wc-settings',
@@ -24,7 +25,7 @@ final class WC_Dizconto_Pay_Card_Block extends AbstractPaymentMethodType {
             null,
             true
         );
-        return [ 'wc-dizconto-pay-card-blocks-integration' ];
+        return [ $integrationName ];
     }
     public function get_payment_method_data() {
         return [

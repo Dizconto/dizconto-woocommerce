@@ -1,4 +1,4 @@
-const pixPaymentMethod = (() => {
+const dizcontoPixPaymentMethod = (() => {
     const paymentMethod = 'dizconto_pay_pix';
 
     const settings = window.wc.wcSettings.getSetting(paymentMethod + '_data', {});
@@ -33,4 +33,4 @@ const pixPaymentMethod = (() => {
     };
 })()
 
-window.wc.wcBlocksRegistry.registerPaymentMethod(pixPaymentMethod);
+window.wc.wcBlocksRegistry.registerPaymentMethod(dizcontoPixPaymentMethod);
