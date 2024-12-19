@@ -18,6 +18,7 @@ const dizcontoCreditCardPaymentMethod = (() => {
                     <div className="wc-block-components-text-input">
                         <input
                             type="text"
+                            autoComplete="cc-name"
                             id="card-holder-name"
                             className="input-text"
                             required
@@ -28,6 +29,7 @@ const dizcontoCreditCardPaymentMethod = (() => {
                         <label htmlFor="card-number">Card Number</label>
                         <input
                             type="text"
+                            autoComplete="cc-number"
                             id="card-number"
                             className="input-text"
                             required
@@ -37,6 +39,7 @@ const dizcontoCreditCardPaymentMethod = (() => {
                         <label htmlFor="expiry-date">Expiry Date (MM/YY)</label>
                         <input
                             type="text"
+                            autoComplete="cc-exp"
                             id="expiry-date"
                             className="input-text"
                             required
@@ -46,6 +49,7 @@ const dizcontoCreditCardPaymentMethod = (() => {
                         <label htmlFor="cvv">CVV</label>
                         <input
                             type="text"
+                            autoComplete="cc-csc"
                             id="cvv"
                             className="input-text"
                             required
