@@ -1,12 +1,17 @@
+import { decodeEntities } from '@wordpress/html-entities';
+import { getSetting } from '@woocommerce/settings';
+import { registerPaymentMethod } from '@woocommerce/blocks-registry';
+
 const dizcontoCreditCardPaymentMethod = (() => {
     const paymentMethod = 'dizconto_pay_credit_card';
 
-    const settings = window.wc.wcSettings.getSetting(paymentMethod + '_data', {});
+    const settings = getSetting(paymentMethod + '_data', {});
+    const title = decodeEntities(settings.title);
 
     const Label = () => {
         return (
             <p>
-                {settings.title}
+                {title}
             </p>
         )
     }
@@ -65,13 +70,13 @@ const dizcontoCreditCardPaymentMethod = (() => {
         paymentMethodId: paymentMethod,
         name: paymentMethod,
         ariaLabel: settings.title,
-        label: <Label/>,
-        content: <Content/>,
-        edit: <Content/>,
+        label: <Label />,
+        content: <Content />,
+        edit: <Content />,
         canMakePayment: () => true,
         supports: {
             features: settings.supports,
         },
     };
 })()
-window.wc.wcBlocksRegistry.registerPaymentMethod(dizcontoCreditCardPaymentMethod);
+registerPaymentMethod(dizcontoCreditCardPaymentMethod);

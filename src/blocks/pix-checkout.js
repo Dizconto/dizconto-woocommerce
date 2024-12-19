@@ -1,12 +1,17 @@
+import { decodeEntities } from '@wordpress/html-entities';
+import { getSetting } from '@woocommerce/settings';
+import { registerPaymentMethod } from '@woocommerce/blocks-registry';
+
 const dizcontoPixPaymentMethod = (() => {
     const paymentMethod = 'dizconto_pay_pix';
 
-    const settings = window.wc.wcSettings.getSetting(paymentMethod + '_data', {});
+    const settings = getSetting(paymentMethod + '_data', {});
+    const title = decodeEntities(settings.title);
 
     const Label = () => {
         return (
             <p>
-                {settings.title}
+                {title}
             </p>
         )
     }
@@ -19,6 +24,7 @@ const dizcontoPixPaymentMethod = (() => {
             </div>
         )
     }
+
     return {
         gatewayId: settings.id,
         paymentMethodId: paymentMethod,
@@ -33,5 +39,4 @@ const dizcontoPixPaymentMethod = (() => {
         },
     };
 })()
-
-window.wc.wcBlocksRegistry.registerPaymentMethod(dizcontoPixPaymentMethod);
+registerPaymentMethod(dizcontoPixPaymentMethod);

@@ -1,6 +1,7 @@
-const path = require('path');
-const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+const path = require( 'path' );
 const glob = require('glob');
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const WooCommerceDependencyExtractionWebpackPlugin = require( '@woocommerce/dependency-extraction-webpack-plugin' );
 
 module.exports = {
     ...defaultConfig,
@@ -12,6 +13,17 @@ module.exports = {
     output: {
         ...defaultConfig.output,
         filename: '[name].js', // Output file names match the source file names
-        path: path.resolve(__dirname, 'build'), // Output directory
+        path: path.resolve(__dirname, 'build'),
     },
+    resolve: {
+        ...defaultConfig.resolve,
+        extensions: ['.js', '.jsx'], // Add .jsx extension
+    },
+    plugins: [
+        ...defaultConfig.plugins.filter(
+            ( plugin ) =>
+                plugin.constructor.name !== 'DependencyExtractionWebpackPlugin'
+        ),
+        new WooCommerceDependencyExtractionWebpackPlugin(),
+    ],
 };
