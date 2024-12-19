@@ -13,9 +13,10 @@ const dizcontoPixPaymentMethod = (() => {
 
     const Content = () => {
         return (
-            <p>
-                {settings.description}
-            </p>
+            <div style={{ paddingBottom: 30, textAlign: 'center' }}>
+                <img src={settings.contentImage} alt={'Pix logo'} width={400} style={{ display: 'block', margin: 'auto' }} />
+                <p>You will be redirected to a payment page.</p>
+            </div>
         )
     }
     return {

@@ -32,6 +32,7 @@ final class WC_Dizconto_Pay_Pix_Block extends AbstractPaymentMethodType {
             'title' => $this->gateway->title,
             'description' => $this->gateway->description,
             'supports' => $this->gateway->supports,
+            'contentImage' => DIZCONTO_PLUGIN_URL . 'assets/images/payment-methods/pix.webp',
         ];
     }
 }
