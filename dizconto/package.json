@@ -1,5 +1,5 @@
 {
-  "name": "dizconto",
+  "name": "dizconto-wp",
   "version": "1.0.0",
   "scripts": {
     "build": "wp-scripts build",
