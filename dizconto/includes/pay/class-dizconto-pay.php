@@ -85,6 +85,7 @@ class Dizconto_Pay {
     /**
      * Register the Dizconto Pay's payment method types.
      *
+     * @since    1.0.0
      * @return void
      */
     public function register_block_payment_method_type() {
@@ -98,6 +99,34 @@ class Dizconto_Pay {
             require_once plugin_dir_path(dirname(__FILE__)) . 'pay/methods/credit-card/class-dizconto-pay-credit-card-block.php';
             $payment_method_registry->register(new Dizconto_Pay_CreditCard_Block($this->plugin_name, $this->version));
         });
+    }
+
+    /**
+     * Handle API webhook for Dizconto Pay module.
+     *
+     * @since    1.0.0
+     * @return void
+     */
+    public function handle_webhook() {
+        $payload = file_get_contents('php://input');
+        $data = json_decode($payload, true);
+        $charge_id = isset($data['chargeId']) ? $data['chargeId'] : null;
+        if (is_null($charge_id)) {
+            header( 'HTTP/1.1 400 Bad Request' );
+            $failure = [
+                'error' => 'Missing chargeId parameter'
+            ];
+            echo json_encode($failure);
+        } else {
+            header( 'HTTP/1.1 200 OK' );
+            $orders = wc_get_orders(array(
+                'meta_key' => 'dizconto_pay_charge_id',
+                'meta_value' => $charge_id
+            ));
+            $order = reset($orders);
+            echo json_encode($order->get_data());
+        }
+        die();
     }
 
 }

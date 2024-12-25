@@ -198,6 +198,7 @@ class Dizconto {
         $this->loader->add_action( 'before_woocommerce_init', $plugin_pay, 'declare_cart_checkout_blocks_compatibility' );
         $this->loader->add_action( 'woocommerce_blocks_loaded', $plugin_pay, 'register_block_payment_method_type' );
         $this->loader->add_filter( 'woocommerce_payment_gateways', $plugin_pay, 'add_payment_gateways' );
+        $this->loader->add_action( 'woocommerce_api_dizconto_pay',  $plugin_pay, 'handle_webhook' );
     }
 
 	/**
