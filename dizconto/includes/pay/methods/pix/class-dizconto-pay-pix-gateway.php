@@ -25,6 +25,8 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
         $this->init_settings();
         add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'update_admin_options' ) );
 
+        // Custom shortcode to render Pix payment page.
+        add_shortcode( 'dizconto_pay_pix_payment', array( $this, 'render_pix_payment_page' ) );
 
     }
 
@@ -98,10 +100,11 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
         }
         $page_slug = $this->get_option('slug');
         $parent_page_id = wc_get_page_id('checkout');
+
         $args = [
             'post_name' => $page_slug,
             'post_title' => 'Pix Payment',
-            'post_content' => '<p>page content</p>',
+            'post_content' => '[dizconto_pay_pix_payment]',
             'post_type' => 'page',
             'post_status' => 'publish',
             'post_author' => 1,
@@ -128,6 +131,23 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
             $page = get_page($post_id);
             $page->post_name = $newSlug;
             wp_update_post($page);
+        }
+    }
+
+    /**
+     * Render the Pix payment page.
+     *
+     * @since    1.0.0
+     * @return string
+     */
+    public function render_pix_payment_page() {
+        $template_path = DIZCONTO_PLUGIN_DIR . 'public/partials/dizconto-pay-pix-payment.php';
+        if ( file_exists( $template_path ) ) {
+            ob_start();
+            include $template_path;
+            return ob_get_clean();
+        } else {
+            return '<p>Pix payment template not found.</p>';
         }
     }
 
