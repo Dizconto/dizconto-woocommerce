@@ -51,10 +51,10 @@ $pix_qrcode_base64 = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAABWQAAAVkAQA
     }, <?php echo $is_check ? 5000 : 15000; ?>)
 </script>
 
-<div style="margin: 50px 0; text-align: center; width: 300px;">
-    <img width="100%" src="<?php echo $pix_qrcode_base64; ?>" alt="QR Code">
-    <input style="display: block;margin: auto; width: 100%; font-size: 20px;" value="<?php echo $pix_code; ?>" disabled />
+<div class="diz-mt-5 diz-text-center diz-w-80">
+    <img src="<?php echo $pix_qrcode_base64; ?>" alt="QR Code" class="diz-w-full">
+    <input class="diz-block diz-mx-auto diz-text-lg diz-w-full diz-text-center" value="<?php echo $pix_code; ?>" disabled />
     <?php if ( $is_check ) : ?>
-    <p style="font-size: 14px; margin: 25px 0 0;">Please note that the payment may take a few minutes to process.</p>
+    <p class="diz-mt-5 diz-text-sm">Please note that the payment may take a few minutes to process.</p>
     <?php endif; ?>
 </div>

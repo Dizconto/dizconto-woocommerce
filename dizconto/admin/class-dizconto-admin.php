@@ -73,6 +73,7 @@ class Dizconto_Admin {
 		 * class.
 		 */
 
+		wp_enqueue_style( $this->plugin_name, DIZCONTO_PLUGIN_URL . 'style.css', array(), $this->version, 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url(__FILE__) . 'css/dizconto-admin.css', array(), $this->version, 'all' );
 
 	}
