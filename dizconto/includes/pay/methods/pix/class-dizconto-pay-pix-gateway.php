@@ -92,10 +92,12 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
      */
     public function register_pix_payment_page() {
         $page_id = $this->get_option('_pix_page_id');
-        if ( get_page($page_id) ) {
+        $current_page = get_page($page_id);
+        if ( $current_page && $current_page->post_status == 'publish' ) {
             return $page_id;
         }
         $page_slug = $this->get_option('slug');
+        $parent_page_id = wc_get_page_id('checkout');
         $args = [
             'post_name' => $page_slug,
             'post_title' => 'Pix Payment',
@@ -103,6 +105,7 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
             'post_type' => 'page',
             'post_status' => 'publish',
             'post_author' => 1,
+            'post_parent' => $parent_page_id
         ];
         $post_id = wp_insert_post($args);
         $this->update_option( '_pix_page_id', $post_id );
