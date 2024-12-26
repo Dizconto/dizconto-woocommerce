@@ -23,6 +23,40 @@ class Dizconto_Pay_CreditCard_Gateway extends WC_Payment_Gateway {
     }
 
     /**
+     * Inject the credit card payment fields into non-block templates.
+     *
+     * @since    1.0.0
+     * @return void
+     */
+    public function payment_fields() {
+
+        echo '<fieldset id="wc-' . esc_attr( $this->id ) . '-cc-form" class="wc-credit-card-form wc-payment-form" style="background:transparent; display: flex;">';
+
+        do_action( 'woocommerce_credit_card_form_start', $this->id );
+
+        echo '
+        <div class="form-row form-row-wide">
+            <label>Card Number <span class="required">*</span></label>
+		    <input id="dizconto_cc_no" type="text" autocomplete="off">
+		</div>
+		<div class="form-row form-row-first">
+			<label>Expiry Date <span class="required">*</span></label>
+			<input id="dizconto_cc_exp" type="text" autocomplete="off" placeholder="MM / YY">
+		</div>
+		<div class="form-row form-row-last">
+			<label>Card Code (CVC) <span class="required">*</span></label>
+			<input id="dizconto_cc_cvv" type="password" autocomplete="off" placeholder="CVC">
+		</div>
+		<div class="clear"></div>
+		';
+
+        do_action( 'woocommerce_credit_card_form_end', $this->id );
+
+        echo '<div class="clear"></div></fieldset>';
+
+    }
+
+    /**
      * Process payment for the credit card payment method.
      *
      * @since 1.0.0
