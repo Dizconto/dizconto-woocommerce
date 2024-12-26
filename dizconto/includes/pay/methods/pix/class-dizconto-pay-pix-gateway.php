@@ -20,7 +20,35 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
             'refunds'
         );
 
+        // Admin form fields
+        $this->init_form_fields();
+        $this->init_settings();
+        add_action( 'woocommerce_update_options_payment_gateways_' . $this->id, array( $this, 'update_admin_options' ) );
 
+
+    }
+
+    /**
+     * Initialize the admin form fields for Pix payment method.
+     *
+     * @since    1.0.0
+     * @return void
+     */
+    public function init_form_fields() {
+        $this->form_fields = array(
+            'slug'       => array(
+                'title'       => 'Payment Page Slug',
+                'type'        => 'text',
+                'description' => 'This controls the slug of the page which the user sees during Pix checkout (e.g. https://example.com/pix).',
+                'default'     => 'pix'
+            ),
+            'expiration' => array(
+                'title'       => 'Expiration Delay',
+                'type'        => 'number',
+                'description' => 'This controls the time in seconds after which the Pix payment will expire (e.g. 900 seconds for 15 minutes).',
+                'default'     => 15 * 60
+            )
+        );
     }
 
     /**
@@ -54,6 +82,50 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Register custom payment page for Pix checkout.
+     *
+     * @since    1.0.0
+     * @return void
+     */
+    public function register_pix_payment_page() {
+        $page_id = $this->get_option('_pix_page_id');
+        if ( get_page($page_id) ) {
+            return $page_id;
+        }
+        $page_slug = $this->get_option('slug');
+        $args = [
+            'post_name' => $page_slug,
+            'post_title' => 'Pix Payment',
+            'post_content' => '<p>page content</p>',
+            'post_type' => 'page',
+            'post_status' => 'publish',
+            'post_author' => 1,
+        ];
+        $post_id = wp_insert_post($args);
+        $this->update_option( '_pix_page_id', $post_id );
+        return $post_id;
+    }
+
+    /**
+     * Update admin options for Pix payment method.
+     * Incl. the slug change for the custom Pix payment page.
+     *
+     * @since    1.0.0
+     * @return void
+     */
+    public function update_admin_options() {
+        $post_id = $this->register_pix_payment_page();
+        $oldSlug = $this->get_option('slug');
+        $this->process_admin_options();
+        $newSlug = $this->get_option('slug');
+        if ($oldSlug != $newSlug) {
+            $page = get_page($post_id);
+            $page->post_name = $newSlug;
+            wp_update_post($page);
+        }
     }
 
 }

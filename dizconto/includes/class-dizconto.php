@@ -117,7 +117,6 @@ class Dizconto {
 		 */
 		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-dizconto-i18n.php';
 
-
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */

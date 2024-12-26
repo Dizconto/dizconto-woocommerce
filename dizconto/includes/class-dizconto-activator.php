@@ -30,7 +30,8 @@ class Dizconto_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
+        require_once plugin_dir_path(__FILE__) . 'pay/class-dizconto-pay-activator.php';
+        Dizconto_Pay_Activator::activate();
 	}
 
 }
