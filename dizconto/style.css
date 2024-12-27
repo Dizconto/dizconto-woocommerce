@@ -11,6 +11,10 @@
   display: block
 }
 
+.diz-flex {
+  display: flex
+}
+
 .diz-w-80 {
   width: 20rem
 }
@@ -19,9 +23,12 @@
   width: 100%
 }
 
-.diz-bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1))
+.diz-flex-1 {
+  flex: 1 1 0%
+}
+
+.diz-pb-8 {
+  padding-bottom: 2rem
 }
 
 .diz-text-center {
