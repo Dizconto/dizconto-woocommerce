@@ -34,10 +34,10 @@ if ( $order->get_payment_method() !== 'dizconto_pay_pix' ) {
 
 // Define url for payment checking. It reloads the page to check payment status.
 // If is_check parameter is set, a hint will be added.
-$check_payment_url = $_SERVER['REQUEST_URI'];
-if ( ! $is_check ) {
-    $check_payment_url .= '&is_check=1';
-}
+$check_payment_url = add_query_arg(
+    array( 'is_check' => 1 ),
+    $_SERVER['REQUEST_URI']
+);
 
 // Load pix payment data.
 $pix_code = "123123123123123";
