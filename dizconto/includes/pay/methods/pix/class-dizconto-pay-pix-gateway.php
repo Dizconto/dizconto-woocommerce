@@ -63,7 +63,8 @@ class Dizconto_Pay_Pix_Gateway extends WC_Payment_Gateway {
     public function process_payment( $order_id )
     {
         $order = wc_get_order($order_id);
-        $order->update_status('payment_pending');
+//        $order->set_transaction_id(); // Set transaction ID.
+//        $order->save();
         return [
             'result'   => 'success',
             'redirect' => $order->get_checkout_order_received_url(),
